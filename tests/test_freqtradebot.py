@@ -4831,16 +4831,16 @@ def test_update_funding_fees(
     nominal_value = mark_price * size
     funding_fee = nominal_value * funding_rate
     size = 123
-    "LTC/BTC"
+    "LTC/USDT"
         time: 0, mark: 3.3, fundRate: 0.00032583, nominal_value: 405.9, fundFee: 0.132254397
         time: 8, mark: 3.2, fundRate: 0.00024472, nominal_value: 393.6, fundFee: 0.096321792
-    "ETH/BTC"
+    "ETH/USDT"
         time: 0, mark: 2.4, fundRate: 0.0001, nominal_value: 295.2, fundFee: 0.02952
         time: 8, mark: 2.5, fundRate: 0.0001, nominal_value: 307.5, fundFee: 0.03075
-    "ETC/BTC"
+    "ETC/USDT"
         time: 0, mark: 4.3, fundRate: 0.00031077, nominal_value: 528.9, fundFee: 0.164366253
         time: 8, mark: 4.1, fundRate: 0.00022655, nominal_value: 504.3, fundFee: 0.114249165
-    "XRP/BTC"
+    "XRP/USDT"
         time: 0, mark: 1.2, fundRate: 0.00049426, nominal_value: 147.6, fundFee: 0.072952776
         time: 8, mark: 1.2, fundRate: 0.00032715, nominal_value: 147.6, fundFee: 0.04828734
     """
@@ -4864,19 +4864,19 @@ def test_update_funding_fees(
     # 16:00 entry is actually never used
     # But should be kept in the test to ensure we're filtering correctly.
     funding_rates = {
-        "LTC/BTC":
+        "LTC/USDT":
             DataFrame([
                 [date_midnight, 0.00032583, 0, 0, 0, 0],
                 [date_eight, 0.00024472, 0, 0, 0, 0],
                 [date_sixteen, 0.00024472, 0, 0, 0, 0],
             ], columns=columns),
-        "ETH/BTC":
+        "ETH/USDT":
             DataFrame([
                 [date_midnight, 0.0001, 0, 0, 0, 0],
                 [date_eight, 0.0001, 0, 0, 0, 0],
                 [date_sixteen, 0.0001, 0, 0, 0, 0],
             ], columns=columns),
-        "XRP/BTC":
+        "XRP/USDT":
             DataFrame([
                 [date_midnight, 0.00049426, 0, 0, 0, 0],
                 [date_eight, 0.00032715, 0, 0, 0, 0],
@@ -4885,19 +4885,19 @@ def test_update_funding_fees(
     }
 
     mark_prices = {
-        "LTC/BTC":
+        "LTC/USDT":
             DataFrame([
                 [date_midnight, 3.3, 0, 0, 0, 0],
                 [date_eight, 3.2, 0, 0, 0, 0],
                 [date_sixteen, 3.2, 0, 0, 0, 0],
             ], columns=columns),
-        "ETH/BTC":
+        "ETH/USDT":
             DataFrame([
                 [date_midnight, 2.4, 0, 0, 0, 0],
                 [date_eight, 2.5, 0, 0, 0, 0],
                 [date_sixteen, 2.5, 0, 0, 0, 0],
             ], columns=columns),
-        "XRP/BTC":
+        "XRP/USDT":
             DataFrame([
                 [date_midnight, 1.2, 0, 0, 0, 0],
                 [date_eight, 1.2, 0, 0, 0, 0],
@@ -4934,9 +4934,9 @@ def test_update_funding_fees(
     freqtrade = get_patched_freqtradebot(mocker, default_conf)
 
     # initial funding fees,
-    freqtrade.execute_entry('ETH/BTC', 123)
-    freqtrade.execute_entry('LTC/BTC', 2.0)
-    freqtrade.execute_entry('XRP/BTC', 123)
+    freqtrade.execute_entry('ETH/USDT', 123)
+    freqtrade.execute_entry('LTC/USDT', 2.0)
+    freqtrade.execute_entry('XRP/USDT', 123)
 
     trades = Trade.get_open_trades()
     assert len(trades) == 3
